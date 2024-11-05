@@ -28,8 +28,8 @@ env:
   RUN_TYPE: strava # support strava/nike/garmin/garmin_cn/garmin_sync_cn_global/keep/only_gpx/only_fit/nike_to_strava/strava_to_garmin/strava_to_garmin_cn/garmin_to_strava/garmin_to_strava_cn/codoon, Please change the 'pass' it to your own
   ATHLETE: Wu Yefei
   TITLE: Workouts
-  MIN_GRID_DISTANCE: 5 # change min distance here
-  TITLE_GRID: 超过5公里的活动 # also here
+  MIN_GRID_DISTANCE: 3 # change min distance here
+  TITLE_GRID: 超过3公里的活动 # also here
   GITHUB_NAME: arthurfsy  # change to yours
   GITHUB_EMAIL: 254904240@qq.com # change to yours
 
