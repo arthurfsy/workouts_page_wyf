@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import React, { useReducer } from 'react';
 import { Analytics } from '@vercel/analytics/react';
 import Layout from '@/components/Layout';
 import LocationStat from '@/components/LocationStat';
@@ -25,6 +26,18 @@ import {
   RunIds,
 } from '@/utils/utils';
 
+const SHOW_LOCATION_STAT = 'SHOW_LOCATION_STAT';
+const SHOW_YEARS_STAT = 'SHOW_YEARS_STAT';
+const reducer = (state: any, action: { type: any }) => {
+  switch (action.type) {
+    case SHOW_LOCATION_STAT:
+      return { showLocationStat: true };
+    case SHOW_YEARS_STAT:
+      return { showLocationStat: false };
+    default:
+      return state;
+  }
+};
 const Index = () => {
   const { siteTitle } = useSiteMetadata();
   const { activities, thisYear } = useActivities();
@@ -83,21 +96,30 @@ const Index = () => {
     changeByItem(type, 'Type', filterTypeRuns);
   };
 
-  const changeTypeInYear = (year:string, type: string) => {
+  const changeTypeInYear = (year: string, type: string) => {
     scrollToMap();
     // type in year, filter year first, then type
-    if(year != 'Total'){
+    if (year != 'Total') {
       setYear(year);
-      setActivity(filterAndSortRuns(activities, year, filterYearRuns, sortDateFunc, type, filterTypeRuns));
-    }
-    else {
+      setActivity(
+        filterAndSortRuns(
+          activities,
+          year,
+          filterYearRuns,
+          sortDateFunc,
+          type,
+          filterTypeRuns
+        )
+      );
+    } else {
       setYear(thisYear);
-      setActivity(filterAndSortRuns(activities, type, filterTypeRuns, sortDateFunc));
+      setActivity(
+        filterAndSortRuns(activities, type, filterTypeRuns, sortDateFunc)
+      );
     }
     setRunIndex(-1);
     setTitle(`${year} ${type} Type Heatmap`);
   };
-
 
   const locateActivity = (runIds: RunIds) => {
     const ids = new Set(runIds);
@@ -190,14 +212,38 @@ const Index = () => {
       svgStat && svgStat.removeEventListener('click', handleClick);
     };
   }, [year]);
+  // 初始化 state 和 dispatch 函数
+  const [state, dispatch] = useReducer(reducer, { showLocationStat: false });
+  // 切换显示组件的函数
+  const handleToggle = () => {
+    if (state.showLocationStat) {
+      dispatch({ type: SHOW_YEARS_STAT });
+    } else {
+      dispatch({ type: SHOW_LOCATION_STAT });
+    }
+  };
 
   return (
     <Layout>
-      <div className="w-full lg:w-1/4">
-        <h1 className="my-12 text-5xl font-extrabold italic">
-          <a href="/">{siteTitle}</a>
+      <div className="w-full items-center lg:w-1/4">
+        <h1 className="my-6 text-3xl font-extrabold italic">
+          <a>{siteTitle}</a>
         </h1>
-        {(viewState.zoom ?? 0) <= 3 && IS_CHINESE ? (
+
+        <div className="my-5 items-center justify-center space-x-4">
+          <button
+            onClick={handleToggle}
+            className="cursor-pointer rounded-[15px] bg-[#00AFAA] p-2.5 text-lg font-extrabold text-white"
+          >
+            {state.showLocationStat ? '👉 年份统计' : '👉 地点统计'}
+          </button>
+
+          <button className="cursor-pointer rounded-[15px] bg-[#006CB8] p-2.5 text-lg font-extrabold text-white">
+            <a href="/log">📊 汇总分析</a>
+          </button>
+        </div>
+
+        {state.showLocationStat ? (
           <LocationStat
             changeYear={changeYear}
             changeCity={changeCity}
@@ -205,9 +251,14 @@ const Index = () => {
             onClickTypeInYear={changeTypeInYear}
           />
         ) : (
-          <YearsStat year={year} onClick={changeYear} onClickTypeInYear={changeTypeInYear}/>
+          <YearsStat
+            year={year}
+            onClick={changeYear}
+            onClickTypeInYear={changeTypeInYear}
+          />
         )}
       </div>
+
       <div className="w-full lg:w-4/5">
         <RunMap
           title={title}
@@ -229,8 +280,9 @@ const Index = () => {
           />
         )}
       </div>
+
       {/* Enable Audiences in Vercel Analytics: https://vercel.com/docs/concepts/analytics/audiences/quickstart */}
-      {import.meta.env.VERCEL && <Analytics /> }
+      {import.meta.env.VERCEL && <Analytics />}
     </Layout>
   );
 };

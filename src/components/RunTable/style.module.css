@@ -21,14 +21,15 @@
 .runTable {
   width: 100%;
   font-variant: tabular-nums;
-  margin: 2rem 0 5rem 0;
+  margin: 1rem 0 5rem 0;
 
   :is(thead) {
-    color: rgb(204, 204, 204);
-    text-align: right;
+    color: #ffffff; /* 设置表头字体颜色 */
+    text-align: center;
 
     :is(th) {
       padding: 0.5rem;
+      background-color: rgb(87, 158, 251); /* 设置表头背景颜色 */
     }
   }
 }
@@ -38,9 +39,10 @@
   :is(td) {
     padding: 0.5rem;
     border: 0;
-    text-align: right;
+    text-align: center;
 
     &:first-child {
+      font-weight: 700;
       text-align: left;
       min-width: 100px;
     }
@@ -51,15 +53,24 @@
   }
 }
 
+.runRow:nth-child(odd) {
+  background-color: rgba(240, 240, 240, 0.5); /* 设置奇数行的背景颜色 */
+}
+
+.runRow:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.5); /* 设置偶数行的背景颜色 */
+}
+
 .selected {
-  color: red !important;
+  color: rgb(27, 43, 56)!important; 
 }
 
 .tableContainer {
   width: 100%;
   overflow-x: auto;
+  margin-top: 1.5em;
 }
 
-.runDate {
-  color: rgb(204, 204, 204);
-}
+/* .runDate {
+  color: rgb(0, 108, 184);
+} */

@@ -11,7 +11,7 @@ interface ISiteMetadataResult {
 }
 
 const data: ISiteMetadataResult = {
-  siteTitle: 'Wu Yefei锻炼记录',
+  siteTitle: '叶子飞锻炼记录',
   siteUrl: 'https://fengsy.cn',
   logo: 'https://pan.4a1801.life:11443/d/public/logo2.jpg',
   description: 'Personal site and blog',
