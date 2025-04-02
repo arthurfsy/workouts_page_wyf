@@ -35,7 +35,7 @@ const USE_DASH_LINE = false;
 // styling: route line opacity: [0, 1]
 const LINE_OPACITY = 0.6;
 // styling: map height
-const MAP_HEIGHT = 500;
+const MAP_HEIGHT = 450;
 //set to `false` if you want to hide the road label characters
 const ROAD_LABEL_DISPLAY = true;
 // update for now 2024/11/17 the privacy mode is true
@@ -54,7 +54,7 @@ const CHINESE_INFO_MESSAGE = (yearLength: number, year: string): string =>
   `运动 ${yearLength} 年 ` + ( year === 'Total' ? '' : `，右图为 ${year} 年的轨迹`);
 
 const ENGLISH_INFO_MESSAGE = (yearLength: number, year: string): string =>
-  `Logged ${yearLength} Years of Journey` +  ( year === 'Total' ? '' : `, the map show routes in ${year}`);
+  `Movement ${yearLength} years` + ( year === 'Total' ? '' : `, the right picture is the trajectory of ${year} years`);
 
 // not support English for now
 const CHINESE_LOCATION_INFO_MESSAGE_FIRST =
@@ -64,6 +64,7 @@ const CHINESE_LOCATION_INFO_MESSAGE_SECOND = '不要停下来，不要停下探�
 const INFO_MESSAGE = IS_CHINESE ? CHINESE_INFO_MESSAGE : ENGLISH_INFO_MESSAGE;
 const FULL_MARATHON_RUN_TITLE = IS_CHINESE ? '全程马拉松 🏃‍♂️' : 'Full Marathon 🏃‍♂️';
 const HALF_MARATHON_RUN_TITLE = IS_CHINESE ? '半程马拉松 🏃‍♀️' : 'Half Marathon 🏃‍♀️';
+const ONE_HUNDRED_KM_CYCLING_TITLE = IS_CHINESE ? '百公里骑行 🚴‍♂️' : '100 KM Ride 🚴‍♂️';
 const RUN_TITLE = IS_CHINESE ? '跑步 🏃' : 'Run 🏃';
 const TRAIL_RUN_TITLE = IS_CHINESE ? '越野跑 🏞️' : 'Trail Run 🏞️';
 const SWIM_TITLE = IS_CHINESE ? '游泳 🏊‍♂️' : 'Swim 🏊‍♂️';
@@ -78,10 +79,14 @@ const SNOWBOARD_TITLE = IS_CHINESE ? '单板滑雪 🏂' : 'Snowboard 🏂';
 const SKI_TITLE = IS_CHINESE ? '双板滑雪 🎿' : 'Ski 🎿';
 const ROAD_TRIP_TITLE = IS_CHINESE ? '自驾 🚗' : 'Road Trip 🚗';
 const FLIGHT_TITLE = IS_CHINESE ? '飞行 ✈️' : 'Flight ✈️';
+const SWITCH_LOCATION_BUTTON = IS_CHINESE ? '👉 地点统计' : '👉 Location Stat.';
+const SWITCH_YEAR_BUTTON = IS_CHINESE ? '👉 年份统计' : '👉 Year Stat.';
+const SUMMARY_BUTTON = IS_CHINESE ? '📊 汇总分析' : '📊 Summary Stat.';
 
 const RUN_TITLES = {
   FULL_MARATHON_RUN_TITLE,
   HALF_MARATHON_RUN_TITLE,
+  ONE_HUNDRED_KM_CYCLING_TITLE,
   RUN_TITLE,
   TRAIL_RUN_TITLE,
 
@@ -119,7 +124,10 @@ export {
   PRIVACY_MODE,
   LIGHTS_ON,
   RICH_TITLE,
-  DEFAULT_LOCATION
+  DEFAULT_LOCATION,
+  SWITCH_LOCATION_BUTTON,
+  SWITCH_YEAR_BUTTON,
+  SUMMARY_BUTTON
 };
 
 const nike = 'rgb(224,237,94)';
