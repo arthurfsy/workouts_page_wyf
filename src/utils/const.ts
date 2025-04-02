@@ -82,6 +82,18 @@ const FLIGHT_TITLE = IS_CHINESE ? '飞行 ✈️' : 'Flight ✈️';
 const SWITCH_LOCATION_BUTTON = IS_CHINESE ? '👉 地点统计' : '👉 Location Stat.';
 const SWITCH_YEAR_BUTTON = IS_CHINESE ? '👉 年份统计' : '👉 Year Stat.';
 const SUMMARY_BUTTON = IS_CHINESE ? '📊 汇总分析' : '📊 Summary Stat.';
+const ACTIVITY_COUNT_TITLE = IS_CHINESE ? '活动次数' : 'Activity Count';
+const MAX_DISTANCE_TITLE = IS_CHINESE ? '最远距离' : 'Max Distance';
+const MAX_SPEED_TITLE = IS_CHINESE ? '最快速度' : 'Max Speed';
+const TOTAL_TIME_TITLE = IS_CHINESE ? '总时间' : 'Total Time';
+const AVERAGE_SPEED_TITLE = IS_CHINESE ? '平均速度' : 'Average Speed';
+const TOTAL_DISTANCE_TITLE = IS_CHINESE ? '总距离' : 'Total Distance';
+const YEARLY_TITLE = IS_CHINESE ? '按年' : 'Yearly';
+const MONTHLY_TITLE = IS_CHINESE ? '按月' : 'Monthly';
+const WEEKLY_TITLE = IS_CHINESE ? '按周' : 'Weekly';
+const DAILY_TITLE = IS_CHINESE ? '按天' : 'Daily';
+const LOCATION_TITLE = IS_CHINESE ? '位置' : 'Location';
+const HOME_BUTTON = IS_CHINESE ? '返回首页' : 'Home';
 
 const RUN_TITLES = {
   FULL_MARATHON_RUN_TITLE,
@@ -102,6 +114,28 @@ const RUN_TITLES = {
   SNOWBOARD_TITLE,
   SKI_TITLE,
 };
+
+const ACTIVITY_TOTAL = {
+  ACTIVITY_COUNT_TITLE,
+  MAX_DISTANCE_TITLE,
+  MAX_SPEED_TITLE,
+  TOTAL_TIME_TITLE,
+  AVERAGE_SPEED_TITLE,
+  TOTAL_DISTANCE_TITLE,
+  YEARLY_TITLE,
+  MONTHLY_TITLE,
+  WEEKLY_TITLE,
+  DAILY_TITLE,
+  LOCATION_TITLE,
+  HOME_BUTTON
+};
+
+const ACTIVITY_TYPES = {
+  RUN_TITLE,
+
+  RIDE_TITLE,
+  HIKE_TITLE,
+}
 
 const DEFAULT_LOCATION = { longitude: 113.9353, latitude: 22.5431, zoom: 9 }  //当某个活动的坐标数据为空时，定义到的城市
 
@@ -127,7 +161,9 @@ export {
   DEFAULT_LOCATION,
   SWITCH_LOCATION_BUTTON,
   SWITCH_YEAR_BUTTON,
-  SUMMARY_BUTTON
+  SUMMARY_BUTTON,
+  ACTIVITY_TOTAL,
+  ACTIVITY_TYPES
 };
 
 const nike = 'rgb(224,237,94)';
