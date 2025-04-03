@@ -34,7 +34,9 @@ const ActivityCard = ({
 
   const data = generateLabels().map((day) => ({
     day,
-    distance: (dailyDistances[day - 1] || 0).toFixed(1), // 保留两位小数
+    [ACTIVITY_TOTAL.TOTAL_DISTANCE_TITLE]: (
+      dailyDistances[day - 1] || 0
+    ).toFixed(1), // 保留两位小数
   }));
 
   const formatTime = (seconds) => {
@@ -54,7 +56,9 @@ const ActivityCard = ({
 
   // 计算 Y 轴的最大值和刻度
   const yAxisMax = Math.ceil(
-    Math.max(...data.map((d) => parseFloat(d.distance))) + 10
+    Math.max(
+      ...data.map((d) => parseFloat(d[ACTIVITY_TOTAL.TOTAL_DISTANCE_TITLE]))
+    ) + 10
   ); // 取整并增加缓冲
   const yAxisTicks = Array.from(
     { length: Math.ceil(yAxisMax / 5) + 1 },
@@ -67,12 +71,12 @@ const ActivityCard = ({
       <div className={styles.activityDetails}>
         <p>
           <strong>{ACTIVITY_TOTAL.TOTAL_DISTANCE_TITLE}:</strong>{' '}
-          {summary.totalDistance.toFixed(2)} km
+          {summary.totalDistance.toFixed(1)} km
         </p>
         <p>
           <strong>{ACTIVITY_TOTAL.AVERAGE_SPEED_TITLE}:</strong>{' '}
           {activityType === 'ride'
-            ? `${summary.averageSpeed.toFixed(2)} km/h`
+            ? `${summary.averageSpeed.toFixed(1)} km/h`
             : formatPace(summary.averageSpeed)}
         </p>
         <p>
@@ -87,12 +91,12 @@ const ActivityCard = ({
             </p>
             <p>
               <strong>{ACTIVITY_TOTAL.MAX_DISTANCE_TITLE}:</strong>{' '}
-              {summary.maxDistance.toFixed(2)} km
+              {summary.maxDistance.toFixed(1)} km
             </p>
             <p>
               <strong>{ACTIVITY_TOTAL.MAX_SPEED_TITLE}:</strong>{' '}
               {activityType === 'ride'
-                ? `${summary.maxSpeed.toFixed(2)} km/h`
+                ? `${summary.maxSpeed.toFixed(1)} km/h`
                 : formatPace(summary.maxSpeed)}
             </p>
           </>
@@ -123,7 +127,10 @@ const ActivityCard = ({
                 <Tooltip
                   formatter={(value) => `${value} km`} // 在 Tooltip 中添加 "km" 后缀
                 />
-                <Bar dataKey="distance" fill="#00AFAA" />
+                <Bar
+                  dataKey={ACTIVITY_TOTAL.TOTAL_DISTANCE_TITLE}
+                  fill="#00AFAA"
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -135,7 +142,7 @@ const ActivityCard = ({
 
 const ActivityList = () => {
   const [interval, setInterval] = useState('month');
-  const [activityType, setActivityType] = useState('run');
+  const [activityType, setActivityType] = useState('ride');
 
   const toggleInterval = (newInterval) => {
     setInterval(newInterval);
@@ -223,34 +230,15 @@ const ActivityList = () => {
   };
 
   const activitiesByInterval = groupActivities(interval);
-  const buttonStyle = {
-    backgroundColor: '#006CB8', // 背景色
-    color: 'white', // 文字颜色
-    border: '1px', // 去除边框
-    borderRadius: '15px', // 圆角
-    padding: '10px 20px', // 内边距
-    fontSize: '18px', // 字体大小
-    cursor: 'pointer', // 鼠标指针样式
-    // marginBottom: '20px', // 底部外边距
-  };
-  const selectStyle = {
-    // backgroundColor: '#006CB8', // 背景色
-    // color: 'white', // 文字颜色
-    border: '1px', // 去除边框
-    borderRadius: '15px', // 圆角
-    padding: '10px 20px', // 内边距
-    fontSize: '15px', // 字体大小
-  };
+
   return (
     <div className={styles.activityList}>
       <div className={styles.filterContainer}>
-        <button>
-          <a href="/" style={buttonStyle}>
-            {ACTIVITY_TOTAL.HOME_BUTTON}
-          </a>
+        <button className="cursor-pointer rounded-2xl border border-transparent bg-[#006CB8] px-5 py-2.5 text-lg text-white">
+          <a href="/">{ACTIVITY_TOTAL.HOME_BUTTON}</a>
         </button>
         <select
-          style={selectStyle}
+          className="cursor-pointer rounded-2xl border border-transparent px-5 py-2.5 text-lg"
           onChange={(e) => setActivityType(e.target.value)}
           value={activityType}
         >
@@ -259,7 +247,7 @@ const ActivityList = () => {
           <option value="hike">{ACTIVITY_TYPES.HIKE_TITLE}</option>
         </select>
         <select
-          style={selectStyle}
+          className="cursor-pointer rounded-2xl border border-transparent px-5 py-2.5 text-lg"
           onChange={(e) => toggleInterval(e.target.value)}
           value={interval}
         >

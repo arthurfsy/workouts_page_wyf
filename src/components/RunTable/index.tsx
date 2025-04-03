@@ -7,7 +7,12 @@ import {
   RunIds,
   formatPace,
 } from '@/utils/utils';
-import { RUN_COLOR, RIDE_COLOR } from '@/utils/const';
+import {
+  RUN_COLOR,
+  RIDE_COLOR,
+  IS_CHINESE,
+  RUNTABLE_TITLE,
+} from '@/utils/const';
 import RunRow from './RunRow';
 import styles from './style.module.css';
 
@@ -94,13 +99,13 @@ const RunTable = ({
   const sortDateFuncClick =
     sortFuncInfo === 'Date' ? sortDateFunc : sortDateFuncReverse;
   const sortFuncMap = new Map([
-    ['🗂️ 类型', sortTypeFunc],
-    ['📏 距离', sortKMFunc],
-    ['⬆️ 总爬升', sortElevationGainFunc],
-    ['🏃 配速(时速)', sortPaceFunc],
-    ['❤️ BPM', sortBPMFunc],
-    ['⏳ 时长', sortRunTimeFunc],
-    ['📅 日期', sortDateFuncClick],
+    [RUNTABLE_TITLE.TYPE_TITLE, sortTypeFunc],
+    ['KM 📏', sortKMFunc],
+    [RUNTABLE_TITLE.ELEVATION_GAIN_TITLE, sortElevationGainFunc],
+    [RUNTABLE_TITLE.PACE_TITLE, sortPaceFunc],
+    ['BPM ❤️', sortBPMFunc],
+    [RUNTABLE_TITLE.DURATION_TITLE, sortRunTimeFunc],
+    [RUNTABLE_TITLE.DATE_TITLE, sortDateFuncClick],
   ]);
 
   const handleClick: React.MouseEventHandler<HTMLElement> = (e) => {
@@ -131,14 +136,14 @@ const RunTable = ({
         <div className="mt-4 flex justify-between rounded-lg bg-gray-100 p-4">
           {max_ride && (
             <p className="text-md font-semibold" style={{ color: RIDE_COLOR }}>
-              最佳配速（骑行）：📅 {max_ride.start_date_local} | 🚴‍♂️ {kmh} | 📏{' '}
-              {rrdistance} km
+              {IS_CHINESE ? '最佳配速（骑行）' : 'Best Pace (Cycling)'}：📅{' '}
+              {max_ride.start_date_local} | 🚴‍♂️ {kmh} | 📏 {rrdistance} km
             </p>
           )}
           {max_run && (
             <p className="text-md font-semibold" style={{ color: RUN_COLOR }}>
-              最佳配速（跑步）：📅 {max_run.start_date_local} | 🏃 {rpaceParts}{' '}
-              | 📏 {rdistance} km
+              {IS_CHINESE ? '最佳配速（跑步）' : 'Best Pace (Running)'}：📅{' '}
+              {max_run.start_date_local} | 🏃 {rpaceParts} | 📏 {rdistance} km
             </p>
           )}
         </div>
