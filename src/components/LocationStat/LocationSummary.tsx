@@ -7,11 +7,11 @@ const LocationSummary = () => {
   return (
     <div className="cursor-pointer">
       <section
-        className={`my-0 mb-8 mr-8 flex flex-wrap rounded-xl bg-[#F5F5F5] px-2 py-4 text-[#579EFB]`}
+        className={`my-0 mb-8 mr-2 flex flex-wrap rounded-xl bg-[#F5F5F5] px-2 py-4 text-[#579EFB] lg:mr-8`}
       >
         {years ? (
           <Stat
-            className="w-full pb-2"
+            className="w-full pb-5"
             value={`${years.length}`}
             description={`${IS_CHINESE ? ' 年里我走过' : years.length > 1 ? 'years, I have traveled to' : 'year, I have traveled to'}`}
           />
@@ -19,20 +19,23 @@ const LocationSummary = () => {
         {countries ? (
           <Stat
             className="w-1/3 pb-2"
+            citySize={4}
             value={`${countries.length}`}
-            description={`${IS_CHINESE ? ' 个国家' : countries.length > 1 ? 'countries' : 'country'}`}
+            description={`${IS_CHINESE ? '个国家' : countries.length > 1 ? 'countries' : 'country'}`}
           />
         ) : null}
         {provinces ? (
           <Stat
             className="w-1/3 pb-2"
+            citySize={4}
             value={provinces.length}
-            description={`${IS_CHINESE ? ' 个省份' : provinces.length > 1 ? 'provinces' : 'province'}`}
+            description={`${IS_CHINESE ? '个省份' : provinces.length > 1 ? 'provinces' : 'province'}`}
           />
         ) : null}
         {cities ? (
           <Stat
             className="w-1/3 pb-2"
+            citySize={4}
             value={Object.keys(cities).length}
             description={`${IS_CHINESE ? ' 个城市' : Object.keys(cities).length > 1 ? 'cities' : 'city'}`}
           />

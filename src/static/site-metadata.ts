@@ -12,18 +12,18 @@ interface ISiteMetadataResult {
 
 const data: ISiteMetadataResult = {
   siteTitle: '叶子飞锻炼记录',
-  siteUrl: 'https://fengsy.cn',
+  siteUrl: 'https://blog.fengsy.cn',
   logo: 'https://pan.4a1801.life:11443/d/public/logo2.jpg',
   description: 'Personal site and blog',
   keywords: 'workouts, running, cycling, riding, roadtrip, hiking, swimming',
   navLinks: [
     {
-      name: '家庭博客',
-      url: 'https://fengsy.cn',
+      name: '📝 Blog',
+      url: 'https://blog.fengsy.cn',
     },
     {
-      name: '关于我们',
-      url: 'https://fengsy.cn/%E5%AE%B6%E5%BA%AD/intro.html',
+      name: '⭐ Repo',
+      url: 'https://github.com/arthurfsy2/workouts_page_fsy',
     },
   ],
 };
